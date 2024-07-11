@@ -50,13 +50,12 @@ public class Game {
         try (Scanner scanner = new Scanner(System.in)) {
             while (scanner.hasNext() && mistakes < ATTEMPT) {
 
-
-
-                literal = scanner.next();
+                literal = scanner.next().toLowerCase();
                 if (!secretWord.contains(literal)) {
-                    listMistakes.add(literal);
-                    mistakes++;
-
+                    if (!listMistakes.contains(literal)) {
+                        listMistakes.add(literal);
+                        mistakes++;
+                    }
                 } else {
                     Pattern pattern = Pattern.compile(literal);
                     Matcher matcher = pattern.matcher(secretWord);
@@ -71,10 +70,12 @@ public class Game {
                 drawScreen();
                 if (mistakes == ATTEMPT) {
                     System.out.println("You've lost. SecretWord: " + secretWord);
+                    stop();
                     break;
                 }
                 if (countGuessedLetters == secretWord.length()) {
                     System.out.println("You have won !!!");
+                    stop();
                     break;
                 }
                 System.out.println("Enter literal");
@@ -91,62 +92,62 @@ public class Game {
                 gallows[i][j] = ' ';
             }
 
-        gallows[2][4] = '|';
-        gallows[1][5] = '-';
-        gallows[1][6] = '-';
-        gallows[1][7] = '-';
-        gallows[1][8] = '|';
-        gallows[2][8] = '|';
-        gallows[3][8] = '|';
-        gallows[4][8] = '|';
-        gallows[5][8] = '|';
-        gallows[6][8] = '|';
-        gallows[7][8] = '|';
-        gallows[8][8] = '|';
-        gallows[9][0] = '-';
-        gallows[9][1] = '-';
-        gallows[9][2] = '-';
-        gallows[9][3] = '−';
-        gallows[9][4] = '-';
-        gallows[9][5] = '-';
-        gallows[9][6] = '-';
-        gallows[9][7] = '-';
-        gallows[9][8] = '-';
-        gallows[9][9] = '-';
+        gallows[2][4] = (char) 124;
+        gallows[1][5] = (char) 95;
+        gallows[1][6] = (char) 95;
+        gallows[1][7] = (char) 95;
+        gallows[1][8] = (char) 124;
+        gallows[2][8] = (char) 124;
+        gallows[3][8] = (char) 124;
+        gallows[4][8] = (char) 124;
+        gallows[5][8] = (char) 124;
+        gallows[6][8] = (char) 124;
+        gallows[7][8] = (char) 124;
+        gallows[8][8] = (char) 124;
+        gallows[9][0] = (char) 95;
+        gallows[9][1] = (char) 95;
+        gallows[9][2] = (char) 95;
+        gallows[9][3] = (char) 95;
+        gallows[9][4] = (char) 95;
+        gallows[9][5] = (char) 95;
+        gallows[9][6] = (char) 95;
+        gallows[9][7] = (char) 95;
+        gallows[9][8] = (char) 95;
+        gallows[9][9] = (char) 95;
 
         switch (mistakes) {
-            case 1 -> gallows[3][4] = 'O';
+            case 1 -> gallows[3][4] = (char) 79;
             case 2 -> {
-                gallows[3][4] = 'O';
-                gallows[5][4] = '|';
+                gallows[3][4] = (char) 79;
+                gallows[5][4] = (char) 124;
             }
             case 3 -> {
-                gallows[3][4] = 'O';
-                gallows[5][4] = '|';
-                gallows[4][3] = '\\';
+                gallows[3][4] = (char) 79;
+                gallows[5][4] = (char) 124;
+                gallows[4][3] = (char) 92;
+
             }
             case 4 -> {
-                gallows[3][4] = 'O';
-                gallows[5][4] = '|';
-                gallows[4][3] = '\\';
-                gallows[4][5] = '/';
+                gallows[3][4] = (char) 79;
+                gallows[5][4] = (char) 124;
+                gallows[4][3] = (char) 92;
+                gallows[4][5] = (char) 47;
             }
             case 5 -> {
-                gallows[3][4] = 'O';
-                gallows[5][4] = '|';
-                gallows[4][3] = '\\';
-                gallows[4][5] = '/';
-                gallows[6][3] = '/';
+                gallows[3][4] = (char) 79;
+                gallows[5][4] = (char) 124;
+                gallows[4][3] = (char) 92;
+                gallows[4][5] = (char) 47;
+                gallows[6][3] = (char) 47;
             }
             case 6 -> {
-                gallows[3][4] = 'O';
-                gallows[5][4] = '|';
-                gallows[4][3] = '\\';
-                gallows[4][5] = '/';
-                gallows[6][3] = '/';
-                gallows[6][5] = '\\';
+                gallows[3][4] = (char) 79;
+                gallows[5][4] = (char) 124;
+                gallows[4][3] = (char) 92;
+                gallows[4][5] = (char) 47;
+                gallows[6][3] = (char) 47;
+                gallows[6][5] = (char) 92;
             }
-
 
         }
 
@@ -193,5 +194,9 @@ public class Game {
     private int randomNumber(int listSize) {
         Random random = new Random();
         return random.nextInt(listSize - 1);
+    }
+
+    private void stop() {
+        instance = null;
     }
 }

@@ -1,27 +1,35 @@
 package org.example;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-/**
- * Hello world!
- */
+
 public class App {
 
     public static void main(String[] args) {
-        System.out.println("Enter start or exit");
-        try (Scanner scanner = new Scanner(System.in)) {
-            String str = scanner.nextLine();
-
-            do {
+        String str = "";
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("Enter start or exit");
+            while (scanner.hasNext()) {
+                str = scanner.next().toLowerCase();
                 if (str.equals("start")) {
                     Game game = Game.getInstance();
                     game.start();
                     break;
-                } else if (!str.equals("exit")) {
+                } else if (str.equals("exit")) {
+                    scanner.close();
+                    System.exit(0);
+                } else {
                     System.out.println("You entered an incorrect command");
-                    break;
+
                 }
-            } while (!str.equals("exit"));
+            }
+
         }
+
+
+
     }
+
 }
