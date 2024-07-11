@@ -1,7 +1,7 @@
 # Виселица (также известна как «Балда») 
 реализация на Java, описание задания 
 https://zhukovsd.github.io/java-backend-learning-course/Projects/Hangman/
-
+Опискание игры на wikipedia https://ru.wikipedia.org/wiki/Виселица_(игра)
 Принцип игры
 ----------
 
@@ -138,3 +138,4 @@ https://zhukovsd.github.io/java-backend-learning-course/Projects/Hangman/
 Буква:
 </p>
 </td></tr></tbody></table>
+Отгадывающий проиграл — загадано слово ЧЕЛОВЕК.
