@@ -20,18 +20,7 @@ public class Game {
     private static List<String> listMistakes;
 
     private Game() {
-        step = 0;
-        mistakes = 0;
-        countGuessedLetters = 0;
-        literal = null;
-        listMistakes = new ArrayList();
-        secretWord = makeWord();
-        if (secretWord != null) {
-            hiddenWord = new String[secretWord.length()];
-            for (int i = 0; i < secretWord.length(); i++) {
-                hiddenWord[i] = ("-");
-            }
-        }
+       newGame();
     }
 
     public static Game getInstance() {
@@ -77,10 +66,26 @@ public class Game {
                     System.out.println("You have won !!!");
                     stop();
                     break;
+
                 }
                 System.out.println("Enter literal");
             }
+            System.out.println("Do you want to play again? (yes/no)");
+
+            while (scanner.hasNext()) {
+                String str = scanner.next().toLowerCase();
+                if (str.equals("yes")) {
+                    newGame();
+                    start();
+                } else if (str.equals("no")) {
+                    System.out.println("Exiting the program...");
+                    System.exit(0);
+                } else {
+                    System.out.println("You entered an incorrect command");
+                }
+            }
         }
+
 
     }
 
@@ -153,6 +158,20 @@ public class Game {
 
     }
 
+    private void newGame(){
+        step = 0;
+        mistakes = 0;
+        countGuessedLetters = 0;
+        literal = null;
+        listMistakes = new ArrayList();
+        secretWord = makeWord();
+        if (secretWord != null) {
+            hiddenWord = new String[secretWord.length()];
+            for (int i = 0; i < secretWord.length(); i++) {
+                hiddenWord[i] = ("-");
+            }
+        }
+    }
 
     private void drawScreen() {
         System.out.println("____________________________________________________________");
